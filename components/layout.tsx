@@ -62,7 +62,12 @@ export default function Layout({
           </>
         )}
       </header>
-      <main>{children}</main>
+
+      <main>
+        {/* Load all child items */}
+        {children}
+      </main>
+
       {!home && (
         <div className={styles.backToHome}>
           <Link href="/">
