@@ -1,6 +1,4 @@
 import Head from "next/head";
-import styles from "./layout.module.css";
-import utilStyles from "../styles/utils.module.css";
 import Link from "next/link";
 import React from "react";
 
@@ -15,7 +13,7 @@ export default function Layout({
   home?: boolean;
 }) {
   return (
-    <div className={styles.container}>
+    <div className={"container mx-auto"}>
       <Head>
         <link rel="icon" href="/favicon.ico" />
         <meta
@@ -33,48 +31,42 @@ export default function Layout({
         <title>{siteTitle}</title>
       </Head>
 
-      <header className={styles.header}>
-        {home ? (
-          <>
-            <img
-              src="/images/profile.jpg"
-              className={`${styles.headerHomeImage} ${utilStyles.borderCircle}`}
-              alt={name}
-            />
-            <h1 className={utilStyles.heading2Xl}>{name}</h1>
-          </>
-        ) : (
-          <>
-            <Link href="/">
-              <a>
-                <img
-                  src="/images/profile.jpg"
-                  className={`${styles.headerImage} ${utilStyles.borderCircle}`}
-                  alt={name}
-                />
-              </a>
-            </Link>
-            <h2 className={utilStyles.headingLg}>
-              <Link href="/">
-                <a className={utilStyles.colorInherit}>{name}</a>
-              </Link>
-            </h2>
-          </>
-        )}
-      </header>
-
-      <main>
-        {/* Load all child items */}
-        {children}
-      </main>
-
-      {!home && (
-        <div className={styles.backToHome}>
-          <Link href="/">
-            <a>← Back to home</a>
-          </Link>
+      {/* Grid container */}
+      <div className={"grid grid-cols-6 gap-4"}>
+        <div className={"col-start-2 col-span-5"}>
+          Title Bar
+          {/* Header... */}
+          <header className={""}>
+            {home ? (
+              <>
+                <h1>Landing Page...</h1>
+              </>
+            ) : (
+              <>
+                <h1>Some Other Page...</h1>
+              </>
+            )}
+          </header>
         </div>
-      )}
+        <div className={"col-start-1 row-start-1 row-span-5"}>Side Nav</div>
+        <div className={"col-start-2 col-span-3"}>
+          Main
+          {/* Load all child items */}
+          <main>{children}</main>
+        </div>
+        <div className={"col-start-5"}>Right</div>
+        <div className={"col-start-2 col-span-4"}>
+          Footer
+          {/* Include all on non-home sites */}
+          {!home && (
+            <div className={""}>
+              <Link href="/">
+                <a>← Back to home</a>
+              </Link>
+            </div>
+          )}
+        </div>
+      </div>
     </div>
   );
 }
