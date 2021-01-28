@@ -2,6 +2,8 @@ import Head from "next/head";
 import Link from "next/link";
 import React from "react";
 
+import TitleBar from "./title-bar";
+
 const name = "Archy";
 export const siteTitle = `${name}\'s Portfolio`;
 
@@ -13,7 +15,7 @@ export default function Layout({
   home?: boolean;
 }) {
   return (
-    <div className={"container mx-auto"}>
+    <div className={"container h-screen w-screen"}>
       <Head>
         <link rel="icon" href="/favicon.ico" />
         <meta
@@ -31,41 +33,8 @@ export default function Layout({
         <title>{siteTitle}</title>
       </Head>
 
-      {/* Grid container */}
-      <div className={"grid grid-cols-6 gap-4"}>
-        <div className={"col-start-2 col-span-5"}>
-          Title Bar
-          {/* Header... */}
-          <header className={""}>
-            {home ? (
-              <>
-                <h1>Landing Page...</h1>
-              </>
-            ) : (
-              <>
-                <h1>Some Other Page...</h1>
-              </>
-            )}
-          </header>
-        </div>
-        <div className={"col-start-1 row-start-1 row-span-5"}>Side Nav</div>
-        <div className={"col-start-2 col-span-3"}>
-          Main
-          {/* Load all child items */}
-          <main>{children}</main>
-        </div>
-        <div className={"col-start-5"}>Right</div>
-        <div className={"col-start-2 col-span-4"}>
-          Footer
-          {/* Include all on non-home sites */}
-          {!home && (
-            <div className={""}>
-              <Link href="/">
-                <a>← Back to home</a>
-              </Link>
-            </div>
-          )}
-        </div>
+      <div className={"mx-auto"}>
+        <main>{children}</main>
       </div>
     </div>
   );
