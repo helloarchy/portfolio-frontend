@@ -1,11 +1,13 @@
 import React from "react";
 
-const title = "Portfolio";
+type Props = {
+  title?: string;
+};
 
-export default function TitleBar({}: {}) {
-  return (
-    <div>
-      <header className={"text-5xl font-serif capitalize"}>{title}</header>
-    </div>
-  );
-}
+const TitleBar = ({ title = "Portfolio" }: Props) => (
+  <div>
+    <header className={"text-5xl font-serif capitalize"}>{title}</header>
+  </div>
+);
+
+export default TitleBar;
