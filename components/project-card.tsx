@@ -1,47 +1,41 @@
 import React from "react";
 import Link from "next/link";
 
-/**
- *
- * @param id
- * @param date
- * @param title
- * @param description
- * @param techStack
- * @param category
- * @param imageSrc
- * @param imageAlt
- * @constructor
- */
-export default function ProjectCard(
-  id: string,
-  date: string,
-  title: string,
-  description: string,
-  techStack: string[],
-  category: string[],
-  imageSrc: string,
-  imageAlt: string
-) {
-  return (
+type ProjectData = {
+  id: string;
+  date: string;
+  title: string;
+  description: string;
+  techStack: string[];
+  categories: string[];
+  imageSrc: string;
+  imageAlt: string;
+};
+
+type Props = {
+  projectData: ProjectData;
+};
+
+const ProjectCard = ({ projectData }: Props) => (
+  <div>
+    <ul>
+      {projectData.categories.map((category) => {
+        return <li>{category}</li>;
+      })}
+    </ul>
+    <header>{projectData.title}</header>
+    <p>{projectData.date}</p>
     <div>
-      <ul>
-        {category.map((category) => {
-          return <li>{category}</li>;
-        })}
-      </ul>
-      <header>{title}</header>
-      <p>{date}</p>
-      <div>
-        <img src={imageSrc} alt={imageAlt} />
-      </div>
-      <p>{description}</p>
-      <ul>
-        {techStack.map((technology) => {
-          return <li>{technology}</li>;
-        })}
-      </ul>
-      <Link href={`/projects/${id}`}>More info</Link>
+      <img src={projectData.imageSrc} alt={projectData.imageAlt} />
     </div>
-  );
-}
+    <p>{projectData.description}</p>
+    <ul>
+      {projectData.techStack.map((technology) => {
+        return <li>{technology}</li>;
+      })}
+    </ul>
+    <Link href={`/projects/${projectData.id}`}>More info</Link>
+  </div>
+);
+
+export default ProjectCard;

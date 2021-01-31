@@ -9,6 +9,10 @@ const projectsDirectory = path.join(process.cwd(), "projects");
 export function getSortedProjectData() {
   // Get file names under /projects
   const fileNames = fs.readdirSync(projectsDirectory);
+
+  /**
+   *
+   */
   const allProjectsData = fileNames.map((fileName) => {
     // Remove ".md" from file name to get id
     const id = fileName.replace(/\.md$/, "");
@@ -20,12 +24,29 @@ export function getSortedProjectData() {
     // Use gray-matter to parse the project metadata section
     const matterResult = matter(fileContents);
 
+    // Parse lists
+    const categories = matterResult.data.categories
+      .split(",")
+      .map((category) => category.trim());
+    const techStack = matterResult.data.techStack
+      .split(",")
+      .map((category) => category.trim());
+
     // Combine the data with the id
     return {
       id,
-      ...(matterResult.data as { date: string; title: string }),
+      ...(matterResult.data as {
+        date: string;
+        title: string;
+        description: string;
+        imageSrc: string;
+        imageAlt: string;
+      }),
+      categories,
+      techStack,
     };
   });
+
   // Sort projects by date
   return allProjectsData.sort((a, b) => {
     if (a.date < b.date) {
