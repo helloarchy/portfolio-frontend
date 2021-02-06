@@ -49,6 +49,7 @@ const Project = ({ projectData }: Props) => (
       </div>
       <div dangerouslySetInnerHTML={{ __html: projectData.contentHtml }} />
     </article>
+    <footer></footer>
   </Layout>
 );
 

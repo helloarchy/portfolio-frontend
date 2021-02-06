@@ -3,15 +3,20 @@ import Link from "next/link";
 import React from "react";
 
 import TitleBar from "./title-bar";
+import ProjectGridList from "./ProjectGridList";
 
 const name = "Archy";
 export const siteTitle = `${name}\'s Portfolio`;
 
 export default function Layout({
   children,
+  left,
+  right,
   home,
 }: {
   children: React.ReactNode;
+  left?: React.ReactNode;
+  right?: React.ReactNode;
   home?: boolean;
 }) {
   return (
@@ -33,9 +38,30 @@ export default function Layout({
         <title>{siteTitle}</title>
       </Head>
 
-      <div className={"mx-auto"}>
-        <main>{children}</main>
-      </div>
+      {/* Main body */}
+      <main className={"mx-auto"}>
+        <div className={"grid grid-cols-5 gap-4"}>
+          {/* Left column */}
+          <div className={""}>
+            Column 1: Projects filter
+            {left}
+          </div>
+
+          {/* Main centre column */}
+          <main className={"col-span-3"}>
+            {/* Child content here */}
+            {children}
+          </main>
+
+          {/* Right column */}
+          <div className={""}>
+            Column 3: Side Nav
+            {right}
+          </div>
+        </div>
+      </main>
+
+      <footer>Some footer content here</footer>
     </div>
   );
 }
