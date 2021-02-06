@@ -1,11 +1,10 @@
-import '../styles/global.css'
-import {AppProps} from 'next/app'
+// Use Tailwind everywhere
+import "tailwindcss/tailwind.css";
 
-function App({
-                 Component,
-                 pageProps
-             }: AppProps) {
-    return <Component {...pageProps} />
+import { AppProps } from "next/app";
+
+function App({ Component, pageProps }: AppProps) {
+  return <Component {...pageProps} />;
 }
 
-export default App
+export default App;
