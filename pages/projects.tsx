@@ -3,6 +3,7 @@ import { GetStaticProps } from "next";
 
 import { getSortedProjectData } from "../lib/projects-lib";
 import ProjectCard from "../components/project-card";
+import ProjectGridList from "../components/ProjectGridList";
 
 /**
  *
@@ -22,11 +23,7 @@ const Projects = ({ allProjectData }) => (
     <div className={""}>Column 1: Projects filter</div>
     <div className={"col-span-3"}>
       {/* Project Grid List */}
-      Column 2: Project card list
-      {/* Create a card for each project using the project data */}
-      {allProjectData.map((projectData) => (
-        <ProjectCard projectData={projectData} />
-      ))}
+      <ProjectGridList projects={allProjectData} />
     </div>
     <div className={""}>Column 3: Side Nav</div>
   </div>
