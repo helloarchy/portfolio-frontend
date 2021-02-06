@@ -75,6 +75,14 @@ export async function getProjectData(id: string) {
   // Use gray-matter to parse the project metadata section
   const matterResult = matter(fileContents);
 
+  // Parse lists
+  const categories = matterResult.data.categories
+    .split(",")
+    .map((category) => category.trim());
+  const techStack = matterResult.data.techStack
+    .split(",")
+    .map((category) => category.trim());
+
   // Use remark to convert markdown into HTML string
   const processedContent = await remark()
     .use(html)
@@ -85,6 +93,14 @@ export async function getProjectData(id: string) {
   return {
     id,
     contentHtml,
-    ...(matterResult.data as { date: string; title: string }),
+    ...(matterResult.data as {
+      date: string;
+      title: string;
+      description: string;
+      imageSrc: string;
+      imageAlt: string;
+    }),
+    categories,
+    techStack,
   };
 }

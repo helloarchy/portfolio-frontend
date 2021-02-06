@@ -3,7 +3,7 @@ import Link from "next/link";
 import React from "react";
 
 import TitleBar from "./title-bar";
-import ProjectGridList from "./ProjectGridList";
+import ProjectGridList from "./project-grid-list";
 
 const name = "Archy";
 export const siteTitle = `${name}\'s Portfolio`;

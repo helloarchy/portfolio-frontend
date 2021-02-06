@@ -22,22 +22,12 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   };
 };
 
-type ProjectData = {
-  title: string;
-  date: string;
-  contentHtml: string;
-};
-
-type Props = {
-  projectData: ProjectData;
-};
-
 /**
  * Generic Template for a project
  * @param projectData
  * @constructor
  */
-const Project = ({ projectData }: Props) => (
+const Project = ({ projectData }) => (
   <Layout>
     <Head>
       <title>{projectData.title}</title>
