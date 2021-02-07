@@ -1,10 +1,11 @@
 export type Project = {
   id: string;
-  date: string;
-  title: string;
-  shortDescription: string;
-  techStack: string[];
   categories: string[];
-  imageSrc: string;
+  contentHtml: string;
+  date: string;
   imageAlt: string;
+  imageSrc: string;
+  shortDescription: string;
+  title: string;
+  techStack: string[];
 };
