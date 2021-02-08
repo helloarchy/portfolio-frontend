@@ -50,6 +50,7 @@ const Project = ({ project }: Props) => (
           {/* Tech stack */}
           {project.techStack.map((tech) => (
             <button
+              key={tech}
               className={
                 "py-2 px-4 shadow-md no-underline rounded-full bg-blue text-white font-sans font-semibold text-sm border-blue btn-primary hover:text-white hover:bg-blue-light focus:outline-none active:shadow-none mr-2"
               }
@@ -60,7 +61,8 @@ const Project = ({ project }: Props) => (
         </div>
       </header>
 
-      <div className={"p-4"}>
+      {/*<div className={"p-4 prose lg:prose-xl"}>*/}
+      <div className={"p-4 prose lg:prose-l"}>
         <div dangerouslySetInnerHTML={{ __html: project.contentHtml }} />
       </div>
     </article>

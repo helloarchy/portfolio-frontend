@@ -11,8 +11,10 @@ type Props = {
 };
 
 const ProjectCard = ({ project, pageLink }: Props) => (
-  <div className={"m-2 bg-white shadow overflow-hidden sm:rounded-lg"}>
-    {/* Article */}
+  <div
+    key={project.id}
+    className={"m-2 bg-white shadow overflow-hidden sm:rounded-lg"}
+  >
     <article className={"overflow-hidden rounded-lg shadow-lg"}>
       {/* Thumbnail */}
       <a href={pageLink}>
@@ -70,7 +72,6 @@ const ProjectCard = ({ project, pageLink }: Props) => (
         </Link>
       </footer>
     </article>
-    {/*<!-- END Article -->*/}
   </div>
 );
 
