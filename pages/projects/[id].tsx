@@ -4,7 +4,7 @@ import { GetStaticProps, GetStaticPaths } from "next";
 import { getAllProjectIds, getProjectData } from "../../lib/projects-lib";
 import Layout from "../../components/layout";
 import Date from "../../components/date";
-import { Project as ProjectType } from "../../interfaces";
+import { Project as ProjectType } from "../../models/Project";
 import React from "react";
 
 export const getStaticPaths: GetStaticPaths = async () => {

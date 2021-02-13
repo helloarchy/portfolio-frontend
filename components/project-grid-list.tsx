@@ -1,5 +1,5 @@
 import React from "react";
-import { Project } from "../interfaces";
+import { Project } from "../models/Project";
 import ProjectCard from "./project-card";
 
 type Props = {
@@ -11,10 +11,11 @@ const ProjectGridList = ({ projects }: Props) => (
     {/* Create a card for each project using the project data */}
     {projects.map((project) => (
       <div
-        key={project.id}
+        // key={project._id} // TODO: Use _id from ProjectModel
         className={"my-3 px-3 w-1/3 overflow-hidden xl:w-1/3"}
       >
-        <ProjectCard project={project} pageLink={`projects/${project.id}`} />
+        {/*<ProjectCard project={project} pageLink={`projects/${project._id}`} />*/}
+        <ProjectCard project={project} pageLink={`projects/${project.title}`} />
       </div>
     ))}
   </div>

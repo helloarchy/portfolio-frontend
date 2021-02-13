@@ -21,7 +21,7 @@ const EditProject = () => {
 
   const projectForm = {
     name: project.name,
-    image_url: project.image_url,
+    image_src: project.image_url,
   };
 
   return (

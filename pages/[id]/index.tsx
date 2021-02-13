@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import dbConnect from "../../utils/dbConnect";
-import Project from "../../models/Project";
+import { ProjectModel } from "../../models/Project";
 
 /* Allows you to view project card info and delete project card*/
 const ProjectPage = ({ project }) => {
@@ -30,7 +30,6 @@ const ProjectPage = ({ project }) => {
           <p className="project-name">{project.name}</p>
           <p className="owner">Owner: {project.owner_name}</p>
 
-          {/* Extra Project Info: Likes and Dislikes */}
           <div className="likes info">
             <p className="label">Likes</p>
             <ul>
@@ -66,7 +65,7 @@ const ProjectPage = ({ project }) => {
 export async function getServerSideProps({ params }) {
   await dbConnect();
 
-  const project = await Project.findById(params.id).lean();
+  const project = await ProjectModel.findById(params.id).lean();
   project._id = project._id.toString();
 
   return { props: { project } };

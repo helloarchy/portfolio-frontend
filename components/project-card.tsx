@@ -3,7 +3,7 @@ import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 
-import { Project } from "../interfaces";
+import { Project } from "../models/Project";
 
 type Props = {
   project: Project;
@@ -12,7 +12,7 @@ type Props = {
 
 const ProjectCard = ({ project, pageLink }: Props) => (
   <div
-    key={project.id}
+    key={project.title} // TODO: Use id from ProjectModel
     className={"m-2 bg-white shadow overflow-hidden sm:rounded-lg"}
   >
     <article className={"overflow-hidden rounded-lg shadow-lg"}>

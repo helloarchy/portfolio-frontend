@@ -1,5 +1,5 @@
 import dbConnect from "../../../utils/dbConnect";
-import Project from "../../../models/Project";
+import { ProjectModel } from "../../../models/Project";
 
 export default async function handler(req, res) {
   const { method } = req;
@@ -9,7 +9,7 @@ export default async function handler(req, res) {
   switch (method) {
     case "GET":
       try {
-        const projects = await Project.find(
+        const projects = await ProjectModel.find(
           {}
         ); /* find all the data in our database */
         res.status(200).json({ success: true, data: projects });
@@ -19,7 +19,7 @@ export default async function handler(req, res) {
       break;
     case "POST":
       try {
-        const project = await Project.create(
+        const project = await ProjectModel.create(
           req.body
         ); /* create a new model in the database */
         res.status(201).json({ success: true, data: project });

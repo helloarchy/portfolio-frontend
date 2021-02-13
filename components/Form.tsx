@@ -10,7 +10,7 @@ const Form = ({ formId, projectForm, forNewProject = true }) => {
 
   const [form, setForm] = useState({
     name: projectForm.name,
-    image_url: projectForm.image_url,
+    image_src: projectForm.image_url,
   });
 
   /* The PUT method edits an existing entry in the mongodb database. */
@@ -91,10 +91,10 @@ const Form = ({ formId, projectForm, forNewProject = true }) => {
   const formValidate = () => {
     let err = {
       name: "",
-      image_url: "",
+      image_src: "",
     };
     if (!form.name) err.name = "Name is required";
-    if (!form.image_url) err.image_url = "Image URL is required";
+    if (!form.image_src) err.image_src = "Image URL is required";
     return err;
   };
 
@@ -115,7 +115,7 @@ const Form = ({ formId, projectForm, forNewProject = true }) => {
         <input
           type="url"
           name="image_url"
-          value={form.image_url}
+          value={form.image_src}
           onChange={handleChange}
           required
         />

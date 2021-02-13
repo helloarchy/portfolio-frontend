@@ -1,13 +1,30 @@
-import mongoose from "mongoose";
+import { prop, getModelForClass } from "@typegoose/typegoose";
+import * as mongoose from "mongoose";
 
-/* ProjectSchema will correspond to a collection in your MongoDB database. */
-const ProjectSchema = new mongoose.Schema({
-  image_url: {
-    /* Url to project image */
-    required: [true, "Please provide an image url for this project."],
-    type: String,
-  },
-});
+export class Project {
+  @prop()
+  public categories: string[];
 
-export default mongoose.models.Project ||
-  mongoose.model("Project", ProjectSchema);
+  @prop()
+  public contentHtml: string;
+
+  @prop()
+  public date: string;
+
+  @prop()
+  public imageAlt: string;
+
+  @prop()
+  public imageSrc: string;
+
+  @prop()
+  public shortDescription: string;
+
+  @prop()
+  public title: string;
+
+  @prop()
+  public techStack: string[];
+}
+
+export const ProjectModel = getModelForClass(Project);
