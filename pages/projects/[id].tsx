@@ -4,6 +4,8 @@ import { GetStaticProps, GetStaticPaths } from "next";
 import { getAllProjectIds, getProjectData } from "../../lib/projects-lib";
 import Layout from "../../components/layout";
 import Date from "../../components/date";
+import { Project as ProjectType } from "../../interfaces";
+import React from "react";
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const paths = getAllProjectIds();
@@ -14,22 +16,16 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const projectData = await getProjectData(params.id as string);
+  const project = await getProjectData(params.id as string);
   return {
     props: {
-      projectData,
+      project,
     },
   };
 };
 
-type ProjectData = {
-  title: string;
-  date: string;
-  contentHtml: string;
-};
-
 type Props = {
-  projectData: ProjectData;
+  project: ProjectType;
 };
 
 /**
@@ -37,17 +33,38 @@ type Props = {
  * @param projectData
  * @constructor
  */
-const Project = ({ projectData }: Props) => (
+const Project = ({ project }: Props) => (
   <Layout>
     <Head>
-      <title>{projectData.title}</title>
+      <title>{project.title}</title>
     </Head>
-    <article>
-      <h1 className={""}>{projectData.title}</h1>
-      <div className={""}>
-        <Date dateString={projectData.date} />
+
+    {/* Body */}
+    <article className={"divide-y pad-2 my-8"}>
+      <header>
+        <h1 className={"text-4xl"}>{project.title}</h1>
+        <div className={"my-2 p-2"}>
+          <Date dateString={project.date} />
+        </div>
+        <div className={"m-2 p-2"}>
+          {/* Tech stack */}
+          {project.techStack.map((tech) => (
+            <button
+              key={tech}
+              className={
+                "py-2 px-4 shadow-md no-underline rounded-full bg-blue text-white font-sans font-semibold text-sm border-blue btn-primary hover:text-white hover:bg-blue-light focus:outline-none active:shadow-none mr-2"
+              }
+            >
+              {tech}
+            </button>
+          ))}
+        </div>
+      </header>
+
+      {/*<div className={"p-4 prose lg:prose-xl"}>*/}
+      <div className={"p-4 prose lg:prose-l"}>
+        <div dangerouslySetInnerHTML={{ __html: project.contentHtml }} />
       </div>
-      <div dangerouslySetInnerHTML={{ __html: projectData.contentHtml }} />
     </article>
   </Layout>
 );
