@@ -5,6 +5,8 @@ import { faLinkedin } from "@fortawesome/free-brands-svg-icons";
 
 type Props = {};
 
+const urlLinkedin = "https://www.linkedin.com/in/hardyrar/";
+
 const Footer = ({}: Props) => (
   <footer className="bg-gray-800 pt-10 sm:mt-10 pt-10">
     <div className="max-w-6xl m-auto text-gray-800 flex flex-wrap justify-left">
@@ -67,13 +69,8 @@ const Footer = ({}: Props) => (
 
         {/* Icons */}
         <div className="md:flex-auto md:flex-row-reverse mt-2 flex-row flex">
-          <a href="#" className="w-6 mx-1">
-            <i className="uil uil-linkedin"></i>
-            <i className="fab fa-linkedin"></i>
-            <i className="fab fa-linkedin"></i>
-            <FontAwesomeIcon icon={["fab", "linkedin"]} />
-            <FontAwesomeIcon icon="linkedin" />
-            {/*  TODO: Try and get these working! */}
+          <a href={urlLinkedin} className="w-6 mx-1">
+            <p>Linkedin</p>
           </a>
         </div>
       </div>
