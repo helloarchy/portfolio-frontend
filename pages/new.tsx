@@ -1,7 +1,7 @@
 import Form from "../components/Form";
 
 const projectForm = {
-  name: "",
+  title: "",
   image_src: "",
 };
 

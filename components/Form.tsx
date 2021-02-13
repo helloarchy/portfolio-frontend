@@ -9,8 +9,8 @@ const Form = ({ formId, projectForm, forNewProject = true }) => {
   const [message, setMessage] = useState("");
 
   const [form, setForm] = useState({
-    name: projectForm.name,
-    image_src: projectForm.image_url,
+    title: projectForm.title,
+    image_src: projectForm.image_src,
   });
 
   /* The PUT method edits an existing entry in the mongodb database. */
@@ -80,44 +80,44 @@ const Form = ({ formId, projectForm, forNewProject = true }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const errs = formValidate();
+    console.log("Validated");
     if (Object.keys(errs).length === 0) {
+      console.log("Trying to add");
       forNewProject ? postData(form) : putData(form);
     } else {
+      console.log("Failed validation");
       setErrors({ errs });
     }
   };
 
-  /* Makes sure project info is filled for project name, owner name, species, and image url*/
+  /* Makes sure project info is filled for project title */
   const formValidate = () => {
     let err = {
-      name: "",
-      image_src: "",
+      name: undefined,
     };
-    if (!form.name) err.name = "Name is required";
-    if (!form.image_src) err.image_src = "Image URL is required";
+    if (!form.title) err.name = "Name is required";
     return err;
   };
 
   return (
     <>
       <form id={formId} onSubmit={handleSubmit}>
-        <label htmlFor="name">Name</label>
+        <label htmlFor="title">Title</label>
         <input
           type="text"
           maxLength={20}
-          name="name"
-          value={form.name}
+          name="title"
+          value={form.title}
           onChange={handleChange}
           required
         />
 
-        <label htmlFor="image_url">Image URL</label>
+        <label htmlFor="image_src">Image URL</label>
         <input
           type="url"
-          name="image_url"
+          name="image_src"
           value={form.image_src}
           onChange={handleChange}
-          required
         />
 
         <button type="submit" className="btn">

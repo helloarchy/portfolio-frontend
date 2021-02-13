@@ -4,7 +4,9 @@ import { ProjectModel } from "../../../models/Project";
 export default async function handler(req, res) {
   const { method } = req;
 
+  console.log("Trying to connect to db");
   await dbConnect();
+  console.log("Connected!");
 
   switch (method) {
     case "GET":
@@ -18,6 +20,7 @@ export default async function handler(req, res) {
       }
       break;
     case "POST":
+      console.log("Trying to post!");
       try {
         const project = await ProjectModel.create(
           req.body
