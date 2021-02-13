@@ -1,12 +1,19 @@
 import Link from "next/link";
 import Head from "next/head";
+import dbConnect from "../utils/dbConnect";
 
 import Layout, { siteTitle } from "../components/layout";
+
+/* Retrieve data from mongodb database */
+export async function getServerSideProps() {
+  await dbConnect();
+  return { props: {} };
+}
 
 /**
  * The landing screen of the site...
  */
-export default function Home({}) {
+function Home({}) {
   return (
     <Layout home>
       <Head>
@@ -18,3 +25,5 @@ export default function Home({}) {
     </Layout>
   );
 }
+
+export default Home;
