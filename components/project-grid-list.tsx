@@ -1,5 +1,5 @@
 import React from "react";
-import { IProject } from "../interfaces/IProject";
+import { IProject } from "../types/IProject";
 import ProjectCard from "./project-card";
 
 type Props = {

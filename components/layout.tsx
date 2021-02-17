@@ -9,17 +9,21 @@ import Footer from "./footer";
 const name = "Archy";
 export const siteTitle = `${name}\'s Portfolio`;
 
+type Props = {
+  children: React.ReactNode;
+  left?: React.ReactNode;
+  right?: React.ReactNode;
+  home?: boolean;
+  pageTitle?: string;
+};
+
 export default function Layout({
   children,
   left,
   right,
   home,
-}: {
-  children: React.ReactNode;
-  left?: React.ReactNode;
-  right?: React.ReactNode;
-  home?: boolean;
-}) {
+  pageTitle,
+}: Props) {
   return (
     <div className={"h-screen w-screen"}>
       {/* Head only */}
@@ -37,7 +41,7 @@ export default function Layout({
         />
         <meta name="og:title" content={siteTitle} />
         <meta name="twitter:card" content="summary_large_image" />
-        <title>{siteTitle}</title>
+        <title>{pageTitle || siteTitle}</title>
       </Head>
 
       {/* Body */}
@@ -59,7 +63,7 @@ export default function Layout({
           {/* Main centre column */}
           <main className={"col-span-3"}>
             {/* Title bar */}
-            <TitleBar />
+            <TitleBar title={pageTitle} />
 
             {/* Child content here */}
             {children}

@@ -3,7 +3,7 @@ import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 
-import { IProject } from "../interfaces/IProject";
+import { IProject } from "../types/IProject";
 
 type Props = {
   project: IProject;
@@ -38,7 +38,7 @@ const ProjectCard = ({ project, pageLink }: Props) => (
       {/* Short Description */}
       <section className={"select-none px-2 max-w-xl"}>
         <p className={"text-grey-darker text-sm"}>{project.date}</p>
-        <p className={"mt-2 text-gray-600"}>{project.shortDescription}</p>
+        <p className={"mt-2 text-gray-600"}>{project.shortDesc}</p>
       </section>
 
       {/* Tech Stack */}

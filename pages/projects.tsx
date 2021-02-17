@@ -2,7 +2,6 @@ import React from "react";
 import { GetStaticProps } from "next";
 
 import { getSortedProjectData } from "../lib/projects-lib";
-import ProjectCard from "../components/project-card";
 import ProjectGridList from "../components/project-grid-list";
 import Layout from "../components/layout";
 

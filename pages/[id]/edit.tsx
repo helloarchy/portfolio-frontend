@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import useSWR from "swr";
-import Form from "../../components/Form";
+import NewProjectForm from "../../components/NewProjectForm";
 
 const fetcher = (url) =>
   fetch(url)
@@ -25,7 +25,7 @@ const EditProject = () => {
   };
 
   return (
-    <Form
+    <NewProjectForm
       formId="edit-project-form"
       projectForm={projectForm}
       forNewProject={false}
