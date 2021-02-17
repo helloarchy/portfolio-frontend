@@ -1,9 +1,9 @@
 import React from "react";
-import { Project } from "../models/Project";
+import { IProject } from "../interfaces/IProject";
 import ProjectCard from "./project-card";
 
 type Props = {
-  projects: Project[];
+  projects: IProject[];
 };
 
 const ProjectGridList = ({ projects }: Props) => (

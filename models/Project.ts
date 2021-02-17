@@ -1,30 +1,15 @@
-import { prop, getModelForClass } from "@typegoose/typegoose";
-import * as mongoose from "mongoose";
+import mongoose, { Document, Schema } from "mongoose";
+import { IProject } from "../interfaces/IProject";
 
-export class Project {
-  @prop()
-  public categories?: string[];
+/* ProjectSchema will correspond to a collection in your MongoDB database. */
+const ProjectSchema: Schema = new Schema({
+  title: {
+    required: [true, "Please provide a title for this project."],
+    type: String,
+  },
+  image_url: {
+    type: String,
+  },
+});
 
-  @prop()
-  public contentHtml?: string;
-
-  @prop()
-  public date?: string;
-
-  @prop()
-  public imageAlt?: string;
-
-  @prop()
-  public imageSrc?: string;
-
-  @prop()
-  public shortDescription?: string;
-
-  @prop()
-  public title: string;
-
-  @prop()
-  public techStack?: string[];
-}
-
-export const ProjectModel = getModelForClass(Project);
+export default mongoose.model<IProject>("Project", ProjectSchema);

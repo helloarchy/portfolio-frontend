@@ -4,7 +4,7 @@ import { GetStaticProps, GetStaticPaths } from "next";
 import { getAllProjectIds, getProjectData } from "../../lib/projects-lib";
 import Layout from "../../components/layout";
 import Date from "../../components/date";
-import { Project as ProjectType } from "../../models/Project";
+import { IProject } from "../../interfaces/IProject";
 import React from "react";
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -25,12 +25,11 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 };
 
 type Props = {
-  project: ProjectType;
+  project: IProject;
 };
 
 /**
  * Generic Template for a project
- * @param projectData
  * @constructor
  */
 const Project = ({ project }: Props) => (

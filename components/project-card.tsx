@@ -3,10 +3,10 @@ import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 
-import { Project } from "../models/Project";
+import { IProject } from "../interfaces/IProject";
 
 type Props = {
-  project: Project;
+  project: IProject;
   pageLink: string;
 };
 

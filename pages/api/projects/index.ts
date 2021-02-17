@@ -1,7 +1,9 @@
 import dbConnect from "../../../utils/dbConnect";
-import { ProjectModel } from "../../../models/Project";
+import Project from "../../../models/Project";
 
-export default async function handler(req, res) {
+import type { NextApiRequest, NextApiResponse } from "next";
+
+export default async (req: NextApiRequest, res: NextApiResponse) => {
   const { method } = req;
 
   console.log("Trying to connect to db");
@@ -11,7 +13,7 @@ export default async function handler(req, res) {
   switch (method) {
     case "GET":
       try {
-        const projects = await ProjectModel.find(
+        const projects = await Project.find(
           {}
         ); /* find all the data in our database */
         res.status(200).json({ success: true, data: projects });
@@ -22,16 +24,18 @@ export default async function handler(req, res) {
     case "POST":
       console.log("Trying to post!");
       try {
-        const project = await ProjectModel.create(
+        const project = await Project.create(
           req.body
         ); /* create a new model in the database */
         res.status(201).json({ success: true, data: project });
+        console.log("Posted");
       } catch (error) {
         res.status(400).json({ success: false });
+        console.log("Failed");
       }
       break;
     default:
       res.status(400).json({ success: false });
       break;
   }
-}
+};

@@ -92,9 +92,7 @@ const Form = ({ formId, projectForm, forNewProject = true }) => {
 
   /* Makes sure project info is filled for project title */
   const formValidate = () => {
-    let err = {
-      name: undefined,
-    };
+    let err: any = {};
     if (!form.title) err.name = "Name is required";
     return err;
   };
