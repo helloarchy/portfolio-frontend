@@ -168,9 +168,9 @@ const NewProjectForm = ({
                         <input
                           type="checkbox"
                           onChange={handleChange}
-                          className="border-gray-300 border-2 text-black focus:border-gray-300 focus:ring-black rounded-full p-2"
+                          className="border-gray-300 border-2 text-black focus:border-gray-300 focus:ring-black rounded-full p-1.5"
                         />
-                        <span className="ml-1.5">
+                        <span className="ml-1 text-sm">
                           {IProjectCategory[category]}
                         </span>
                       </label>
