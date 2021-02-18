@@ -51,7 +51,7 @@ export default function Layout({
           <div className={""}>
             {/* Self plug */}
             <div className={"relative"}>
-              <h1 className={"bottom-0 right-0 text-5xl font-serif"}>
+              <h1 className={"p-4 bottom-0 right-0 text-5xl font-serif"}>
                 Archy.dev
               </h1>
             </div>

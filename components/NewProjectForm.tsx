@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
 import { mutate } from "swr";
+import { IProjectCategory } from "../types/IProjectCategory";
 
 type Props = {
   formId?: string;
@@ -119,18 +120,13 @@ const NewProjectForm = ({
         <form id={formId} onSubmit={handleSubmit}>
           <div className="shadow overflow-hidden sm:rounded-md">
             <div className="px-4 py-5 bg-white sm:p-6">
-              <div className="grid grid-cols-6 gap-6">
+              <div className="grid grid-cols-1 gap-6">
                 {/* Title */}
-                <div className="col-span-6 sm:col-span-4">
-                  <label
-                    className="block text-sm font-medium text-gray-700"
-                    htmlFor="title"
-                  >
-                    Title
-                  </label>
+                <label className="block" htmlFor="title">
+                  <span className={"text-gray-700"}>Title</span>
                   <input
                     className={
-                      "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                      "mt-0 block w-full px-0.5 border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-black"
                     }
                     maxLength={20}
                     name={"title"}
@@ -139,26 +135,21 @@ const NewProjectForm = ({
                     type={"text"}
                     value={form.title}
                   />
-                </div>
+                </label>
 
                 {/* Date */}
-                <div className={"col-span-6 sm:col-span-4"}>
-                  <label
-                    className={"block text-sm font-medium text-gray-700"}
-                    htmlFor={"date"}
-                  >
-                    Date
-                  </label>
+                <label className={"block"} htmlFor={"date"}>
+                  <span className={"text-gray-700"}>Date</span>
                   <input
                     className={
-                      "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                      "mt-0 block w-full px-0.5 border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-black"
                     }
                     name={"date"}
                     onChange={handleChange}
                     type={"date"}
                     value={form.date}
                   />
-                </div>
+                </label>
 
                 {/* Image URL */}
                 {/* Image Desc */}
@@ -167,23 +158,24 @@ const NewProjectForm = ({
                 {/* Tech Stack */}
                 {/* Content Markdown */}
 
-                <div className="col-span-6 sm:col-span-3">
-                  <label
-                    htmlFor="country"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    Country / Region
-                  </label>
-                  <select
-                    id="country"
-                    name="country"
-                    autoComplete="country"
-                    className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                  >
-                    <option>United Kingdom</option>
-                    <option>Canada</option>
-                    <option>Mexico</option>
-                  </select>
+                <div className={"block"}>
+                  <div className={"mb-1"}>
+                    <span className={"text-gray-700"}>Categories</span>
+                  </div>
+                  {Object.keys(IProjectCategory).map((category) => {
+                    return (
+                      <label className="inline-flex items-center border-2 rounded-full m-1 p-2">
+                        <input
+                          type="checkbox"
+                          onChange={handleChange}
+                          className="border-gray-300 border-2 text-black focus:border-gray-300 focus:ring-black rounded-full p-2"
+                        />
+                        <span className="ml-1.5">
+                          {IProjectCategory[category]}
+                        </span>
+                      </label>
+                    );
+                  })}
                 </div>
               </div>
             </div>
@@ -198,12 +190,6 @@ const NewProjectForm = ({
           </div>
         </form>
       </div>
-
-      <form id={formId} onSubmit={handleSubmit}>
-        <button type="submit" className="btn">
-          Submit
-        </button>
-      </form>
       <p>{message}</p>
       <div>
         {Object.keys(errors).map((err, index) => (
