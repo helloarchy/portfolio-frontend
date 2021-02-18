@@ -152,6 +152,19 @@ const NewProjectForm = ({
                 </label>
 
                 {/* Image URL */}
+                <label className={"block"} htmlFor={"imageUrl"}>
+                  <span className={"text-gray-700"}>Image URL</span>
+                  <input
+                    className={
+                      "mt-0 block w-full px-0.5 border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-black"
+                    }
+                    name={"imageUrl"}
+                    onChange={handleChange}
+                    type={"url"}
+                    value={form.imageUrl}
+                  />
+                </label>
+
                 {/* Image Desc */}
                 {/* Short Desc */}
                 {/* Categories */}
