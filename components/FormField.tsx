@@ -1,7 +1,10 @@
 import React from "react";
 import { IFormFieldType } from "../types/IFormFieldType";
+import CheckboxPill from "./CheckboxPill";
+import { ICheckboxListItem } from "../types/ICheckboxListItem";
 
 type Props = {
+  checkboxList?: ICheckboxListItem[];
   form?: string;
   formValue;
   handleChange;
@@ -11,9 +14,10 @@ type Props = {
 };
 
 const FormField = ({
-  handleChange,
+  checkboxList,
   form,
   formValue,
+  handleChange,
   name,
   title,
   type,
@@ -35,13 +39,11 @@ const FormField = ({
       break;
   }
 
-  if (isTextArea && !form)
-    throw new Error("Form parameter is required for textarea");
-
-  return (
-    <label className={"block"} htmlFor={name}>
-      <span className={"text-gray-700"}>{title}</span>
-      {isTextArea ? (
+  if (isTextArea) {
+    if (!form) throw new Error("Form parameter is required for textarea");
+    return (
+      <label className={"block"} htmlFor={name}>
+        <span className={"text-gray-700"}>{title}</span>
         <textarea
           className={
             "mt-0 block w-full px-0.5 border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-black"
@@ -52,17 +54,42 @@ const FormField = ({
           rows={rows}
           value={formValue}
         />
-      ) : (
-        <input
-          className={
-            "mt-0 block w-full px-0.5 border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-black"
-          }
-          name={name}
-          onChange={handleChange}
-          type={type}
-          value={formValue}
-        />
-      )}
+      </label>
+    );
+  }
+
+  if (type === IFormFieldType.checkboxList) {
+    if (!checkboxList) throw new Error("Checkbox list requires a checkboxList");
+    return (
+      <div className={"block"}>
+        <div className={"mb-1"}>
+          <span className={"text-gray-700"}>{title}</span>
+        </div>
+        {checkboxList.map((checkboxItem) => {
+          return (
+            <CheckboxPill
+              changeHandler={handleChange}
+              key={checkboxItem.key}
+              title={checkboxItem.title}
+            />
+          );
+        })}
+      </div>
+    );
+  }
+
+  return (
+    <label className={"block"} htmlFor={name}>
+      <span className={"text-gray-700"}>{title}</span>
+      <input
+        className={
+          "mt-0 block w-full px-0.5 border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-black"
+        }
+        name={name}
+        onChange={handleChange}
+        type={type}
+        value={formValue}
+      />
     </label>
   );
 };

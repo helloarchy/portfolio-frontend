@@ -6,6 +6,8 @@ import { IProjectCategory } from "../types/IProjectCategory";
 import { IFormFieldType } from "../types/IFormFieldType";
 
 import FormField from "./FormField";
+import CheckboxPill from "./CheckboxPill";
+import { ICheckboxListItem } from "../types/ICheckboxListItem";
 
 type Props = {
   formId?: string;
@@ -117,6 +119,14 @@ const NewProjectForm = ({
     return err;
   };
 
+  let categoryCheckboxList: ICheckboxListItem[] = [];
+  Object.keys(IProjectCategory).forEach((category) => {
+    categoryCheckboxList.push({
+      key: category,
+      title: IProjectCategory[category],
+    });
+  });
+
   return (
     <>
       <div className="mt-5 md:mt-0 md:col-span-2">
@@ -175,31 +185,17 @@ const NewProjectForm = ({
                 />
 
                 {/* Categories */}
+                <FormField
+                  checkboxList={categoryCheckboxList}
+                  formValue={form.categories}
+                  handleChange={handleChange}
+                  name={"categories"}
+                  title={"Categories"}
+                  type={IFormFieldType.checkboxList}
+                />
+
                 {/* Tech Stack */}
                 {/* Content Markdown */}
-
-                <div className={"block"}>
-                  <div className={"mb-1"}>
-                    <span className={"text-gray-700"}>Categories</span>
-                  </div>
-                  {Object.keys(IProjectCategory).map((category) => {
-                    return (
-                      <label
-                        key={category}
-                        className="inline-flex items-center border-2 rounded-full m-1 p-2"
-                      >
-                        <input
-                          type="checkbox"
-                          onChange={handleChange}
-                          className="border-gray-300 border-2 text-black focus:border-gray-300 focus:ring-black rounded-full p-1.5"
-                        />
-                        <span className="ml-1 text-sm">
-                          {IProjectCategory[category]}
-                        </span>
-                      </label>
-                    );
-                  })}
-                </div>
               </div>
             </div>
             <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">

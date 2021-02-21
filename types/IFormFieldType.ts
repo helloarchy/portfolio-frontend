@@ -5,4 +5,6 @@ export enum IFormFieldType {
   textAreaSmall = "textAreaSmall",
   textAreaMedium = "textAreaMedium",
   textAreaLarge = "textAreaLarge",
+  checkbox = "checkbox",
+  checkboxList = "checkboxList",
 }
