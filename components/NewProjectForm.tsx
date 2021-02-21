@@ -145,7 +145,6 @@ const NewProjectForm = ({
               <div className="grid grid-cols-1 gap-6">
                 {/* Title */}
                 <FormField
-                  form={formId}
                   formValue={form.title}
                   handleChange={handleChange}
                   name={"title"}
@@ -155,7 +154,6 @@ const NewProjectForm = ({
 
                 {/* Date */}
                 <FormField
-                  form={formId}
                   formValue={form.date}
                   handleChange={handleChange}
                   name={"date"}
@@ -165,7 +163,6 @@ const NewProjectForm = ({
 
                 {/* Image URL */}
                 <FormField
-                  form={formId}
                   formValue={form.imageUrl}
                   handleChange={handleChange}
                   name={"imageUrl"}
@@ -175,7 +172,6 @@ const NewProjectForm = ({
 
                 {/* Image Desc */}
                 <FormField
-                  form={formId}
                   formValue={form.imageDesc}
                   handleChange={handleChange}
                   name={"imageDesc"}
@@ -185,10 +181,10 @@ const NewProjectForm = ({
 
                 {/* Short Desc */}
                 <FormField
-                  form={formId}
+                  formId={formId}
                   formValue={form.shortDescription}
                   handleChange={handleChange}
-                  name={"shortDesc"}
+                  name={"shortDescription"}
                   title={"Short Project Description"}
                   type={IFormFieldType.textAreaMedium}
                 />
@@ -215,7 +211,7 @@ const NewProjectForm = ({
 
                 {/* Content Markdown */}
                 <FormField
-                  form={formId}
+                  formId={formId}
                   formValue={form.contentMarkdown}
                   handleChange={handleChange}
                   name={"contentMarkdown"}
