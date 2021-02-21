@@ -31,7 +31,7 @@ const NewProjectForm = ({
     contentMarkdown: projectForm.contentMarkdown,
     date: projectForm.date,
     imageDesc: projectForm.imageDesc,
-    imageUrl: projectForm.imageSrc,
+    imageUrl: projectForm.imageUrl,
     shortDescription: projectForm.shortDescription,
     techStack: projectForm.techStack,
     title: projectForm.title,

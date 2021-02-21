@@ -60,7 +60,7 @@ const FormField = ({
   if (type === IFormFieldType.checkboxList) {
     if (!checkboxList) throw new Error("Checkbox list requires a checkboxList");
     return (
-      <div className={"block"}>
+      <label className={"block"}>
         <div className={"mb-1"}>
           <span className={"text-gray-700"}>{title}</span>
         </div>
@@ -73,7 +73,7 @@ const FormField = ({
             />
           );
         })}
-      </div>
+      </label>
     );
   }
 
