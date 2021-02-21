@@ -8,6 +8,7 @@ import { IFormFieldType } from "../types/IFormFieldType";
 import FormField from "./FormField";
 import CheckboxPill from "./CheckboxPill";
 import { ICheckboxListItem } from "../types/ICheckboxListItem";
+import { IProjectTechStack } from "../types/IProjectTechStack";
 
 type Props = {
   formId?: string;
@@ -127,6 +128,14 @@ const NewProjectForm = ({
     });
   });
 
+  let techStackCheckboxList: ICheckboxListItem[] = [];
+  Object.keys(IProjectTechStack).forEach((category) => {
+    techStackCheckboxList.push({
+      key: category,
+      title: IProjectTechStack[category],
+    });
+  });
+
   return (
     <>
       <div className="mt-5 md:mt-0 md:col-span-2">
@@ -195,7 +204,24 @@ const NewProjectForm = ({
                 />
 
                 {/* Tech Stack */}
+                <FormField
+                  checkboxList={techStackCheckboxList}
+                  formValue={form.techStack}
+                  handleChange={handleChange}
+                  name={"techStack"}
+                  title={"Tech Stack"}
+                  type={IFormFieldType.checkboxList}
+                />
+
                 {/* Content Markdown */}
+                <FormField
+                  form={formId}
+                  formValue={form.contentMarkdown}
+                  handleChange={handleChange}
+                  name={"contentMarkdown"}
+                  title={"Markdown Content"}
+                  type={IFormFieldType.textAreaLarge}
+                />
               </div>
             </div>
             <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
