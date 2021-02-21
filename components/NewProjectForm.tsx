@@ -1,7 +1,11 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
 import { mutate } from "swr";
+
 import { IProjectCategory } from "../types/IProjectCategory";
+import { IFormFieldType } from "../types/IFormFieldType";
+
+import FormField from "./FormField";
 
 type Props = {
   formId?: string;
@@ -76,16 +80,15 @@ const NewProjectForm = ({
         throw new Error(res.status.toString());
       }
 
-      router.push("/");
+      await router.push("/");
     } catch (error) {
       setMessage("Failed to add project");
     }
   };
 
-  const handleChange = (e) => {
-    const target = e.target;
-    const value =
-      target.name === "poddy_trained" ? target.checked : target.value;
+  const handleChange = (event) => {
+    const target = event.target;
+    const value = target.type === "checkbox" ? target.checked : target.value;
     const name = target.name;
 
     setForm({
@@ -122,51 +125,55 @@ const NewProjectForm = ({
             <div className="px-4 py-5 bg-white sm:p-6">
               <div className="grid grid-cols-1 gap-6">
                 {/* Title */}
-                <label className="block" htmlFor="title">
-                  <span className={"text-gray-700"}>Title</span>
-                  <input
-                    className={
-                      "mt-0 block w-full px-0.5 border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-black"
-                    }
-                    maxLength={20}
-                    name={"title"}
-                    onChange={handleChange}
-                    required={true}
-                    type={"text"}
-                    value={form.title}
-                  />
-                </label>
+                <FormField
+                  form={formId}
+                  formValue={form.title}
+                  handleChange={handleChange}
+                  name={"title"}
+                  title={"Title"}
+                  type={IFormFieldType.text}
+                />
 
                 {/* Date */}
-                <label className={"block"} htmlFor={"date"}>
-                  <span className={"text-gray-700"}>Date</span>
-                  <input
-                    className={
-                      "mt-0 block w-full px-0.5 border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-black"
-                    }
-                    name={"date"}
-                    onChange={handleChange}
-                    type={"date"}
-                    value={form.date}
-                  />
-                </label>
+                <FormField
+                  form={formId}
+                  formValue={form.date}
+                  handleChange={handleChange}
+                  name={"date"}
+                  title={"Date"}
+                  type={IFormFieldType.date}
+                />
 
                 {/* Image URL */}
-                <label className={"block"} htmlFor={"imageUrl"}>
-                  <span className={"text-gray-700"}>Image URL</span>
-                  <input
-                    className={
-                      "mt-0 block w-full px-0.5 border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-black"
-                    }
-                    name={"imageUrl"}
-                    onChange={handleChange}
-                    type={"url"}
-                    value={form.imageUrl}
-                  />
-                </label>
+                <FormField
+                  form={formId}
+                  formValue={form.imageUrl}
+                  handleChange={handleChange}
+                  name={"imageUrl"}
+                  title={"Image URL"}
+                  type={IFormFieldType.url}
+                />
 
                 {/* Image Desc */}
+                <FormField
+                  form={formId}
+                  formValue={form.imageDesc}
+                  handleChange={handleChange}
+                  name={"imageDesc"}
+                  title={"Image Description"}
+                  type={IFormFieldType.text}
+                />
+
                 {/* Short Desc */}
+                <FormField
+                  form={formId}
+                  formValue={form.shortDescription}
+                  handleChange={handleChange}
+                  name={"shortDesc"}
+                  title={"Short Project Description"}
+                  type={IFormFieldType.textAreaMedium}
+                />
+
                 {/* Categories */}
                 {/* Tech Stack */}
                 {/* Content Markdown */}
@@ -177,7 +184,10 @@ const NewProjectForm = ({
                   </div>
                   {Object.keys(IProjectCategory).map((category) => {
                     return (
-                      <label className="inline-flex items-center border-2 rounded-full m-1 p-2">
+                      <label
+                        key={category}
+                        className="inline-flex items-center border-2 rounded-full m-1 p-2"
+                      >
                         <input
                           type="checkbox"
                           onChange={handleChange}
