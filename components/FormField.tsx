@@ -69,7 +69,9 @@ const FormField = ({
             <CheckboxPill
               changeHandler={handleChange}
               key={checkboxItem.key}
+              listName={checkboxItem.listName}
               title={checkboxItem.title}
+              value={checkboxItem.value}
             />
           );
         })}

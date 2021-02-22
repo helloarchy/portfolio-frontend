@@ -1,22 +1,12 @@
 import mongoose, { Schema } from "mongoose";
 import { IProject } from "../types/IProject";
-import { IProjectCategory } from "../types/IProjectCategory";
-import { IProjectTechStack } from "../types/IProjectTechStack";
-
-const categoriesSchema = new Schema({
-  category: IProjectCategory,
-});
-
-const techStackSchema = new Schema({
-  tech: IProjectTechStack,
-});
 
 /* ProjectSchema will correspond to a collection in your MongoDB database. */
-const ProjectSchema: Schema = new Schema({
+const ProjectSchema = new Schema({
   categories: {
-    type: [categoriesSchema],
+    type: [String],
   },
-  contentMarkdown: {
+  bodyMarkdown: {
     type: String,
   },
   date: {
@@ -36,7 +26,7 @@ const ProjectSchema: Schema = new Schema({
     type: String,
   },
   techStack: {
-    type: [techStackSchema],
+    type: [String],
   },
 });
 

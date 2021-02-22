@@ -2,13 +2,13 @@ import NewProjectForm from "../../components/NewProjectForm";
 import Layout from "../../components/layout";
 
 const projectForm = {
-  categories: [""],
-  contentMarkdown: "",
+  categories: [],
+  bodyMarkdown: "",
   date: "",
   imageDesc: "",
   imageUrl: "",
-  shortDescription: "For the project card...",
-  techStack: [""],
+  shortDesc: "For the project card...",
+  techStack: [],
   title: "",
 };
 

@@ -6,7 +6,6 @@ import { IProjectCategory } from "../types/IProjectCategory";
 import { IFormFieldType } from "../types/IFormFieldType";
 
 import FormField from "./FormField";
-import CheckboxPill from "./CheckboxPill";
 import { ICheckboxListItem } from "../types/ICheckboxListItem";
 import { IProjectTechStack } from "../types/IProjectTechStack";
 
@@ -26,16 +25,65 @@ const NewProjectForm = ({
   const [errors, setErrors] = useState({});
   const [message, setMessage] = useState("");
 
-  const [form, setForm] = useState({
-    categories: projectForm.categories,
-    contentMarkdown: projectForm.contentMarkdown,
-    date: projectForm.date,
-    imageDesc: projectForm.imageDesc,
-    imageUrl: projectForm.imageUrl,
-    shortDescription: projectForm.shortDescription,
-    techStack: projectForm.techStack,
-    title: projectForm.title,
+  const categoryCheckboxList: ICheckboxListItem[] = [];
+  Object.keys(IProjectCategory).forEach((category) => {
+    categoryCheckboxList.push({
+      key: category,
+      listName: "categories",
+      title: IProjectCategory[category],
+      value: category,
+    });
   });
+
+  const techStackCheckboxList: ICheckboxListItem[] = [];
+  Object.keys(IProjectTechStack).forEach((tech) => {
+    techStackCheckboxList.push({
+      key: tech,
+      listName: "techStack",
+      title: IProjectTechStack[tech],
+      value: tech,
+    });
+  });
+
+  const [form, setForm] = useState({
+    categories: [],
+    bodyMarkdown: "The markdown for the full project page...",
+    date: "",
+    imageDesc: "An image of...",
+    imageUrl: "",
+    shortDesc: "For the project card...",
+    techStack: [],
+    title: "",
+  });
+
+  const handleChange = (event) => {
+    const target = event.target;
+    const value = target.type === "checkbox" ? target.checked : target.value;
+    const name = target.name;
+
+    if (Array.isArray(form[name])) {
+      console.log(`${name} is an array`);
+      if (form[name].includes(target.value)) {
+        console.log(`TEST: removing ${target.value} from ${[name]}`);
+        setForm((oldForm) => ({
+          ...oldForm,
+          [name]: oldForm[name].splice(`${target.value}`, 1),
+        }));
+      } else {
+        console.log(`TEST: adding ${target.value} to ${[name]}`);
+        setForm((oldForm) => ({
+          ...oldForm,
+          [name]: oldForm[name].concat(`${target.value}`),
+        }));
+      }
+    } else {
+      console.log(`${name} is not an array`);
+      setForm({
+        ...form,
+        [name]: value,
+      });
+    }
+  };
 
   /* The PUT method edits an existing entry in the mongodb database. */
   const putData = async (form) => {
@@ -60,7 +108,7 @@ const NewProjectForm = ({
 
       // Update the local data without a revalidation
       await mutate(`/api/projects/${id}`, data, false);
-      await router.push("/");
+      await router.push("/projects");
     } catch (error) {
       setMessage("Failed to update project");
     }
@@ -83,21 +131,10 @@ const NewProjectForm = ({
         throw new Error(res.status.toString());
       }
 
-      await router.push("/");
+      await router.push("/projects");
     } catch (error) {
       setMessage("Failed to add project");
     }
-  };
-
-  const handleChange = (event) => {
-    const target = event.target;
-    const value = target.type === "checkbox" ? target.checked : target.value;
-    const name = target.name;
-
-    setForm({
-      ...form,
-      [name]: value,
-    });
   };
 
   const handleSubmit = (e) => {
@@ -119,22 +156,6 @@ const NewProjectForm = ({
     if (!form.title) err.name = "Name is required";
     return err;
   };
-
-  let categoryCheckboxList: ICheckboxListItem[] = [];
-  Object.keys(IProjectCategory).forEach((category) => {
-    categoryCheckboxList.push({
-      key: category,
-      title: IProjectCategory[category],
-    });
-  });
-
-  let techStackCheckboxList: ICheckboxListItem[] = [];
-  Object.keys(IProjectTechStack).forEach((category) => {
-    techStackCheckboxList.push({
-      key: category,
-      title: IProjectTechStack[category],
-    });
-  });
 
   return (
     <>
@@ -182,9 +203,9 @@ const NewProjectForm = ({
                 {/* Short Desc */}
                 <FormField
                   formId={formId}
-                  formValue={form.shortDescription}
+                  formValue={form.shortDesc}
                   handleChange={handleChange}
-                  name={"shortDescription"}
+                  name={"shortDesc"}
                   title={"Short Project Description"}
                   type={IFormFieldType.textAreaMedium}
                 />
@@ -212,9 +233,9 @@ const NewProjectForm = ({
                 {/* Content Markdown */}
                 <FormField
                   formId={formId}
-                  formValue={form.contentMarkdown}
+                  formValue={form.bodyMarkdown}
                   handleChange={handleChange}
-                  name={"contentMarkdown"}
+                  name={"bodyMarkdown"}
                   title={"Markdown Content"}
                   type={IFormFieldType.textAreaLarge}
                 />

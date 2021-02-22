@@ -1,7 +1,7 @@
 ---
 title: 'When to Use Static Generation v.s. Server-side Rendering'
 date: '2020-01-02'
-shortDescription: 'Lorem ipsum dolor sit amet'
+shortDesc: 'Lorem ipsum dolor sit amet'
 techStack: 'one, two'
 categories: 'cat one, cat two'
 imageSrc: 'www.image.com/derp.jpg'
