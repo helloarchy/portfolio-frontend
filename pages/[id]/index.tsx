@@ -1,8 +1,11 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import dbConnect from "../../utils/dbConnect";
 import Project from "../../models/Project";
+import Layout from "../../components/layout";
+import Head from "next/head";
+import Date from "../../components/date";
 
 /* Allows you to view project card info and delete project card*/
 const ProjectPage = ({ project }) => {
@@ -22,43 +25,39 @@ const ProjectPage = ({ project }) => {
   };
 
   return (
-    <div key={project._id}>
-      <div className="card">
-        <img src={project.image_url} alt={"project pic"} />
-        <h5 className="project-name">{project.name}</h5>
-        <div className="main-content">
-          <p className="project-name">{project.name}</p>
-          <p className="owner">Owner: {project.owner_name}</p>
+    <Layout>
+      <Head>
+        <title>{project.title}</title>
+      </Head>
 
-          <div className="likes info">
-            <p className="label">Likes</p>
-            <ul>
-              {project.likes.map((data, index) => (
-                <li key={index}>{data} </li>
-              ))}
-            </ul>
+      {/* Body */}
+      <article className={"divide-y pad-2 my-8"}>
+        <header>
+          <h1 className={"text-4xl"}>{project.title}</h1>
+          <div className={"my-2 p-2"}>
+            <Date dateString={project.date} />
           </div>
-          <div className="dislikes info">
-            <p className="label">Dislikes</p>
-            <ul>
-              {project.dislikes.map((data, index) => (
-                <li key={index}>{data} </li>
-              ))}
-            </ul>
+          <div className={"m-2 p-2"}>
+            {/* Tech stack */}
+            {project.techStack.map((tech) => (
+              <button
+                key={tech}
+                className={
+                  "py-2 px-4 shadow-md no-underline rounded-full bg-blue text-white font-sans font-semibold text-sm border-blue btn-primary hover:text-white hover:bg-blue-light focus:outline-none active:shadow-none mr-2"
+                }
+              >
+                {tech}
+              </button>
+            ))}
           </div>
+        </header>
 
-          <div className="btn-container">
-            <Link href={"/[id]/edit"} as={`/${project._id}/edit`}>
-              <button className="btn edit">Edit</button>
-            </Link>
-            <button className="btn delete" onClick={handleDelete}>
-              Delete
-            </button>
-          </div>
+        {/*<div className={"p-4 prose lg:prose-xl"}>*/}
+        <div className={"p-4 prose lg:prose-l"}>
+          <div dangerouslySetInnerHTML={{ __html: project.contentHtml }} />
         </div>
-      </div>
-      {message && <p>{message}</p>}
-    </div>
+      </article>
+    </Layout>
   );
 };
 

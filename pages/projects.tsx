@@ -1,31 +1,26 @@
 import React from "react";
-import { GetStaticProps } from "next";
+import { useRouter } from "next/router";
+import useSWR from "swr";
 
-import { getSortedProjectData } from "../lib/projects-lib";
 import ProjectGridList from "../components/project-grid-list";
 import Layout from "../components/layout";
 
-/**
- *
- * @param context
- */
-export const getStaticProps: GetStaticProps = async (context) => {
-  const allProjectData = getSortedProjectData();
-  return {
-    props: {
-      allProjectData,
-    },
-  };
-};
-
 const left = <div className={""}>Column 1: Projects filter</div>;
-
 const right = <div className={""}>Column 3: Side Nav</div>;
+const fetcher = (url) => fetch(url).then((res) => res.json());
 
-const Projects = ({ allProjectData }) => (
-  <Layout left={left} right={right}>
-    <ProjectGridList projects={allProjectData} />
-  </Layout>
-);
+const Projects = () => {
+  const { query } = useRouter();
+  const { data, error } = useSWR(`/api/projects`, fetcher);
+
+  if (error) return <div>{error.message}</div>;
+  if (!data) return <div>Loading...</div>;
+
+  return (
+    <Layout left={left} right={right}>
+      <ProjectGridList projects={data.data} />
+    </Layout>
+  );
+};
 
 export default Projects;
