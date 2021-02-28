@@ -2,8 +2,10 @@
 This is the front end of my portfolio website. See [archy.dev](https://archy.dev) for a live example.
 
 # Tech Stack
-* [Next.js](https://nextjs.org/)
+* [Next.js](https://nextjs.org/) & TypeScript
 * [Tailwind CSS]()
+* Mongo & [Typegoose](https://github.com/typegoose/typegoose)
+
 
 
 ## Getting Started

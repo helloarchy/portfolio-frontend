@@ -1,32 +1,42 @@
 import React from "react";
-import { GetStaticProps } from "next";
+import { useRouter } from "next/router";
 
-import { getSortedProjectData } from "../lib/projects-lib";
-import ProjectCard from "../components/project-card";
 import ProjectGridList from "../components/project-grid-list";
 import Layout from "../components/layout";
+import { IProject } from "../types/IProject";
 
-/**
- *
- * @param context
- */
-export const getStaticProps: GetStaticProps = async (context) => {
-  const allProjectData = getSortedProjectData();
+export async function getStaticProps(context) {
+  const res = await fetch(`${process.env.BACKEND_API}/projects`);
+  const data = await res.json();
+
+  if (!data) {
+    return {
+      notFound: true,
+    };
+  }
+
   return {
     props: {
-      allProjectData,
-    },
+      projects: data as Array<IProject>,
+    }, // will be passed to the page component as props
   };
+}
+
+type Props = {
+  projects: Array<IProject>;
 };
 
 const left = <div className={""}>Column 1: Projects filter</div>;
-
 const right = <div className={""}>Column 3: Side Nav</div>;
 
-const Projects = ({ allProjectData }) => (
-  <Layout left={left} right={right}>
-    <ProjectGridList projects={allProjectData} />
-  </Layout>
-);
+const Projects = ({ projects }: Props) => {
+  const { query } = useRouter();
+
+  return (
+    <Layout left={left} right={right}>
+      <ProjectGridList projects={projects} />
+    </Layout>
+  );
+};
 
 export default Projects;

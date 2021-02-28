@@ -3,16 +3,17 @@ import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 
-import { Project } from "../interfaces";
+import { IProject } from "../types/IProject";
+import { IProjectTechStack } from "../types/IProjectTechStack";
 
 type Props = {
-  project: Project;
+  project: IProject;
   pageLink: string;
 };
 
 const ProjectCard = ({ project, pageLink }: Props) => (
   <div
-    key={project.id}
+    key={project._id}
     className={"m-2 bg-white shadow overflow-hidden sm:rounded-lg"}
   >
     <article className={"overflow-hidden rounded-lg shadow-lg"}>
@@ -38,19 +39,20 @@ const ProjectCard = ({ project, pageLink }: Props) => (
       {/* Short Description */}
       <section className={"select-none px-2 max-w-xl"}>
         <p className={"text-grey-darker text-sm"}>{project.date}</p>
-        <p className={"mt-2 text-gray-600"}>{project.shortDescription}</p>
+        <p className={"mt-2 text-gray-600"}>{project.shortDesc}</p>
       </section>
 
       {/* Tech Stack */}
       <section className={"p-2"}>
         <div className={"mx-2 p2 select-none flex"}>
-          {project.techStack.map((tech) => (
+          {project.techStack.map((tech: IProjectTechStack) => (
             <button
+              key={tech}
               className={
                 "py-2 px-4 shadow-md no-underline rounded-full bg-blue text-white font-sans font-semibold text-sm border-blue btn-primary hover:text-white hover:bg-blue-light focus:outline-none active:shadow-none mr-2"
               }
             >
-              {tech}
+              {IProjectTechStack[tech]}
             </button>
           ))}
         </div>

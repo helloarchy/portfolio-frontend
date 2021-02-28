@@ -1,7 +1,7 @@
 ---
 title: 'Two Forms of Pre-rendering'
 date: '2020-01-01'
-shortDescription: 'Lorem ipsum dolor sit amet'
+shortDesc: 'Lorem ipsum dolor sit amet'
 techStack: 'one, two'
 categories: 'cat one, cat two'
 imageSrc: 'www.image.com/derp.jpg'

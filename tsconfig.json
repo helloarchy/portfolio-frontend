@@ -1,6 +1,9 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "baseUrl": ".",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "target": "ES6",
     "lib": [
       "dom",
       "dom.iterable",

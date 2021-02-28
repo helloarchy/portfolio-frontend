@@ -5,7 +5,7 @@ type Props = {
 };
 
 const TitleBar = ({ title = "Portfolio" }: Props) => (
-  <div>
+  <div className={"p-4"}>
     <header className={"text-3xl font-serif capitalize"}>{title}</header>
   </div>
 );

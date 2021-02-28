@@ -1,20 +1,17 @@
 import Link from "next/link";
-import Head from "next/head";
 
-import Layout, { siteTitle } from "../components/layout";
+import Layout from "../components/layout";
 
 /**
  * The landing screen of the site...
  */
-export default function Home({}) {
+function Home({}) {
   return (
-    <Layout home>
-      <Head>
-        <title>{siteTitle}</title>
-      </Head>
-
+    <Layout home pageTitle={"Welcome"}>
       {/* Hello stuff here... */}
       <Link href={"/projects"}>Projects</Link>
     </Layout>
   );
 }
+
+export default Home;
