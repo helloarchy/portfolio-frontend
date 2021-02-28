@@ -11,13 +11,13 @@ import { IProjectTechStack } from "../types/IProjectTechStack";
 
 type Props = {
   formId?: string;
-  projectForm?: any;
+  initialForm?: any;
   forNewProject?: boolean;
 };
 
 const NewProjectForm = ({
   formId,
-  projectForm,
+  initialForm,
   forNewProject = true,
 }: Props) => {
   const router = useRouter();
@@ -46,14 +46,14 @@ const NewProjectForm = ({
   });
 
   const [form, setForm] = useState({
-    categories: [],
-    bodyMarkdown: "The markdown for the full project page...",
-    date: "",
-    imageDesc: "An image of...",
-    imageUrl: "",
-    shortDesc: "For the project card...",
-    techStack: [],
-    title: "",
+    bodyMarkdown: initialForm.bodyMarkdown,
+    categories: initialForm.categories,
+    date: initialForm.date,
+    imageDesc: initialForm.imageDesc,
+    imageUrl: initialForm.imageUrl,
+    shortDesc: initialForm.shortDesc,
+    techStack: initialForm.techStack,
+    title: initialForm.title,
   });
 
   const handleChange = (event) => {
@@ -62,22 +62,18 @@ const NewProjectForm = ({
     const name = target.name;
 
     if (Array.isArray(form[name])) {
-      console.log(`${name} is an array`);
       if (form[name].includes(target.value)) {
-        console.log(`TEST: removing ${target.value} from ${[name]}`);
         setForm((oldForm) => ({
           ...oldForm,
           [name]: oldForm[name].splice(`${target.value}`, 1),
         }));
       } else {
-        console.log(`TEST: adding ${target.value} to ${[name]}`);
         setForm((oldForm) => ({
           ...oldForm,
           [name]: oldForm[name].concat(`${target.value}`),
         }));
       }
     } else {
-      console.log(`${name} is not an array`);
       setForm({
         ...form,
         [name]: value,
@@ -116,6 +112,8 @@ const NewProjectForm = ({
 
   /* The POST method adds a new entry in the mongodb database. */
   const postData = async (form) => {
+    console.log("Trying to post!");
+    console.log(`${process.env.BACKEND_API}/projects`);
     try {
       const res = await fetch("/api/projects", {
         method: "POST",
@@ -140,9 +138,7 @@ const NewProjectForm = ({
   const handleSubmit = (e) => {
     e.preventDefault();
     const errs = formValidate();
-    console.log("Validated");
     if (Object.keys(errs).length === 0) {
-      console.log("Trying to add");
       forNewProject ? postData(form) : putData(form);
     } else {
       console.log("Failed validation");

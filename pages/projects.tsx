@@ -1,24 +1,40 @@
 import React from "react";
 import { useRouter } from "next/router";
-import useSWR from "swr";
 
 import ProjectGridList from "../components/project-grid-list";
 import Layout from "../components/layout";
+import { IProject } from "../types/IProject";
+
+export async function getStaticProps(context) {
+  const res = await fetch(`${process.env.BACKEND_API}/projects`);
+  const data = await res.json();
+
+  if (!data) {
+    return {
+      notFound: true,
+    };
+  }
+
+  return {
+    props: {
+      projects: data as Array<IProject>,
+    }, // will be passed to the page component as props
+  };
+}
+
+type Props = {
+  projects: Array<IProject>;
+};
 
 const left = <div className={""}>Column 1: Projects filter</div>;
 const right = <div className={""}>Column 3: Side Nav</div>;
-const fetcher = (url) => fetch(url).then((res) => res.json());
 
-const Projects = () => {
+const Projects = ({ projects }: Props) => {
   const { query } = useRouter();
-  const { data, error } = useSWR(`/api/projects`, fetcher);
-
-  if (error) return <div>{error.message}</div>;
-  if (!data) return <div>Loading...</div>;
 
   return (
     <Layout left={left} right={right}>
-      <ProjectGridList projects={data.data} />
+      <ProjectGridList projects={projects} />
     </Layout>
   );
 };

@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 
 import { IProject } from "../types/IProject";
+import { IProjectTechStack } from "../types/IProjectTechStack";
 
 type Props = {
   project: IProject;
@@ -12,7 +13,7 @@ type Props = {
 
 const ProjectCard = ({ project, pageLink }: Props) => (
   <div
-    key={project.title} // TODO: Use id from ProjectModel
+    key={project._id}
     className={"m-2 bg-white shadow overflow-hidden sm:rounded-lg"}
   >
     <article className={"overflow-hidden rounded-lg shadow-lg"}>
@@ -44,13 +45,14 @@ const ProjectCard = ({ project, pageLink }: Props) => (
       {/* Tech Stack */}
       <section className={"p-2"}>
         <div className={"mx-2 p2 select-none flex"}>
-          {project.techStack.map((tech) => (
+          {project.techStack.map((tech: IProjectTechStack) => (
             <button
+              key={tech}
               className={
                 "py-2 px-4 shadow-md no-underline rounded-full bg-blue text-white font-sans font-semibold text-sm border-blue btn-primary hover:text-white hover:bg-blue-light focus:outline-none active:shadow-none mr-2"
               }
             >
-              {tech}
+              {IProjectTechStack[tech]}
             </button>
           ))}
         </div>

@@ -8,7 +8,7 @@ const projectsDirectory = path.join(process.cwd(), "projects");
 
 export function getSortedProjectData() {
   // Get file names under /projects
-  const fileNames = fs.readdirSync(projectsDirectory);
+  const fileNames = [""]; // fs.readdirSync(projectsDirectory);
 
   /**
    *

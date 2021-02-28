@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import useSWR from "swr";
-import NewProjectForm from "../../components/NewProjectForm";
+import NewProjectForm from "../../../components/NewProjectForm";
 
 const fetcher = (url) =>
   fetch(url)
@@ -8,6 +8,7 @@ const fetcher = (url) =>
     .then((json) => json.data);
 
 const EditProject = () => {
+  console.log("Trying to render the edit page for some reason?");
   const router = useRouter();
   const { id } = router.query;
   // https://www.npmjs.com/package/swr
@@ -27,7 +28,7 @@ const EditProject = () => {
   return (
     <NewProjectForm
       formId="edit-project-form"
-      projectForm={projectForm}
+      initialForm={projectForm}
       forNewProject={false}
     />
   );

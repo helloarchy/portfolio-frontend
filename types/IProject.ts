@@ -3,12 +3,12 @@ import { IProjectCategory } from "./IProjectCategory";
 import { IProjectTechStack } from "./IProjectTechStack";
 
 export interface IProject extends Document {
+  bodyMarkdown?: string;
   categories?: IProjectCategory[];
-  contentHtml?: string;
   date?: string;
   imageDesc?: string;
   imageUrl?: string;
   shortDesc?: string;
-  title: string; // Required
   techStack?: IProjectTechStack[];
+  title: string; // Required
 }

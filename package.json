@@ -20,6 +20,8 @@
     "autoprefixer": "^10.2.3",
     "classnames": "^2.2.6",
     "date-fns": "^2.16.1",
+    "dotenv": "^8.2.0",
+    "fs": "^0.0.1-security",
     "gray-matter": "^4.0.2",
     "mdast-util-to-hast": "^10.1.1",
     "mongoose": "^5.11.16",
