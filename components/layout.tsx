@@ -25,7 +25,7 @@ export default function Layout({
   pageTitle,
 }: Props) {
   return (
-    <div className={"h-screen w-screen"}>
+    <React.Fragment>
       {/* Head only */}
       <Head>
         <link rel="icon" href="/favicon.ico" />
@@ -78,6 +78,6 @@ export default function Layout({
       </main>
 
       <Footer />
-    </div>
+    </React.Fragment>
   );
 }
