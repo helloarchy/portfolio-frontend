@@ -1,5 +1,5 @@
 import NewProjectForm from "../../components/NewProjectForm";
-import Layout from "../../components/layout";
+import Layout from "../../components/Layout";
 
 const projectForm = {
   bodyMarkdown: "The markdown for the full project page...",

@@ -1,7 +1,7 @@
 import React from "react";
 import Masonry from "react-masonry-css";
 
-import Layout from "../components/layout";
+import Layout from "../components/Layout";
 import ProjectCard from "../components/project-card";
 
 import { IProject } from "../types/IProject";
@@ -33,9 +33,10 @@ const right = <div className={""}>Column 3: Side Nav</div>;
 const Projects = ({ projects }: Props) => {
   const breakpointColumnsObj = {
     default: 3,
-    1100: 3,
-    700: 2,
-    500: 1,
+    480: 1,
+    768: 1,
+    976: 2,
+    1440: 3,
   };
 
   return (
