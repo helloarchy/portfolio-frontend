@@ -1,8 +1,9 @@
 import React from "react";
-import { useRouter } from "next/router";
+import Masonry from "react-masonry-css";
 
-import ProjectGridList from "../components/project-grid-list";
-import Layout from "../components/layout";
+import Layout from "../components/Layout";
+import ProjectCard from "../components/project-card";
+
 import { IProject } from "../types/IProject";
 
 export async function getStaticProps(context) {
@@ -30,11 +31,31 @@ const left = <div className={""}>Column 1: Projects filter</div>;
 const right = <div className={""}>Column 3: Side Nav</div>;
 
 const Projects = ({ projects }: Props) => {
-  const { query } = useRouter();
+  const breakpointColumnsObj = {
+    default: 3,
+    480: 1,
+    768: 1,
+    976: 2,
+    1440: 3,
+  };
 
   return (
     <Layout left={left} right={right}>
-      <ProjectGridList projects={projects} />
+      {/* https://www.npmjs.com/package/react-masonry-css */}
+      <Masonry
+        breakpointCols={breakpointColumnsObj}
+        className="flex"
+        columnClassName=""
+      >
+        {/* Create a card for each project using the project data */}
+        {projects.map((project: IProject) => (
+          <ProjectCard
+            key={project._id}
+            project={project}
+            pageLink={`projects/${project._id}`}
+          />
+        ))}
+      </Masonry>
     </Layout>
   );
 };

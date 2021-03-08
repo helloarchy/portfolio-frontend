@@ -12,11 +12,11 @@ type Props = {
 };
 
 const ProjectCard = ({ project, pageLink }: Props) => (
-  <div
-    key={project._id}
-    className={"m-2 bg-white shadow overflow-hidden sm:rounded-lg"}
-  >
-    <article className={"overflow-hidden rounded-lg shadow-lg"}>
+  <div className={"my-3 mb-6 px-3"}>
+    <article
+      key={project._id}
+      className={"bg-white shadow-lg overflow-hidden rounded-lg"}
+    >
       {/* Thumbnail */}
       <a href={pageLink}>
         {/* Get a random image */}

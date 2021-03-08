@@ -1,10 +1,10 @@
 import Head from "next/head";
-import Link from "next/link";
 import React from "react";
 
 import TitleBar from "./title-bar";
-import ProjectGridList from "./project-grid-list";
 import Footer from "./footer";
+import NavLink from "./NavLink";
+import Navigation from "./Navigation";
 
 const name = "Archy";
 export const siteTitle = `${name}\'s Portfolio`;
@@ -17,15 +17,9 @@ type Props = {
   pageTitle?: string;
 };
 
-export default function Layout({
-  children,
-  left,
-  right,
-  home,
-  pageTitle,
-}: Props) {
+export default function Layout({ children, left, right, pageTitle }: Props) {
   return (
-    <div className={"h-screen w-screen"}>
+    <React.Fragment>
       {/* Head only */}
       <Head>
         <link rel="icon" href="/favicon.ico" />
@@ -71,13 +65,13 @@ export default function Layout({
 
           {/* Right column */}
           <div className={""}>
-            Column 3: Side Nav
-            {right}
+            {/* If something provided for right column, use it, else side nav */}
+            {right ? <Navigation /> : right}
           </div>
         </div>
       </main>
 
       <Footer />
-    </div>
+    </React.Fragment>
   );
 }
