@@ -28,7 +28,6 @@ type Props = {
 };
 
 const left = <div className={""}>Column 1: Projects filter</div>;
-const right = <div className={""}>Column 3: Side Nav</div>;
 
 const Projects = ({ projects }: Props) => {
   const breakpointColumnsObj = {
@@ -40,7 +39,7 @@ const Projects = ({ projects }: Props) => {
   };
 
   return (
-    <Layout left={left} right={right}>
+    <Layout pageTitle={"Projects"} left={left}>
       {/* https://www.npmjs.com/package/react-masonry-css */}
       <Masonry
         breakpointCols={breakpointColumnsObj}

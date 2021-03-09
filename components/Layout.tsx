@@ -13,7 +13,6 @@ type Props = {
   children: React.ReactNode;
   left?: React.ReactNode;
   right?: React.ReactNode;
-  home?: boolean;
   pageTitle?: string;
 };
 
@@ -66,7 +65,7 @@ export default function Layout({ children, left, right, pageTitle }: Props) {
           {/* Right column */}
           <div className={""}>
             {/* If something provided for right column, use it, else side nav */}
-            {right ? <Navigation /> : right}
+            {right ? right : <Navigation />}
           </div>
         </div>
       </main>
