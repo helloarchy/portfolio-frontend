@@ -1,10 +1,10 @@
 import React from "react";
 import Masonry from "react-masonry-css";
 
-import Layout from "../components/Layout";
-import ProjectCard from "../components/project-card";
+import Layout from "../../components/Layout";
+import ProjectCard from "../../components/project-card";
 
-import { IProject } from "../types/IProject";
+import { IProject } from "../../types/IProject";
 
 export async function getStaticProps(context) {
   const res = await fetch(`${process.env.BACKEND_API}/projects`);
@@ -36,7 +36,7 @@ const Projects = ({ projects }: Props) => {
     480: 1,
     768: 1,
     976: 2,
-    1440: 3,
+    1440: 2,
   };
 
   return (

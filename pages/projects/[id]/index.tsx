@@ -4,12 +4,23 @@ import { IProject } from "../../../types/IProject";
 import Layout from "../../../components/Layout";
 import Date from "../../../components/date";
 import { IProjectTechStack } from "../../../types/IProjectTechStack";
+import { mdToHtml } from "../../../lib/projects-lib";
+import Pill from "../../../components/Pill";
+import { IProjectCategory } from "../../../types/IProjectCategory";
 
 export async function getServerSideProps({ params }) {
   const res = await fetch(`${process.env.BACKEND_API}/projects/${params.id}`);
   const data = await res.json();
+  const project = data as IProject;
 
-  return { props: { project: data as IProject } };
+  /* Convert markdown to html */
+  project.bodyHtml = await mdToHtml(project.bodyMarkdown);
+
+  return {
+    props: {
+      project,
+    },
+  };
 }
 
 type Props = {
@@ -35,43 +46,52 @@ const ProjectPage = ({ project }: Props) => {
 
   return (
     <Layout pageTitle={project.title ? project.title : "Project"}>
-      {/* Body */}
       <article className={"divide-y pad-2 my-8"}>
+        {/* Top Matter */}
         <header>
+          {/* Title */}
           <h1 className={"text-4xl"}>{project.title}</h1>
+
+          {/* Date */}
           <div className={"my-2 p-2"}>
             {project.date ? <Date dateString={project.date} /> : null}
           </div>
+
+          {/* Categories */}
           <div className={"m-2 p-2"}>
-            {/* Tech stack */}
-            {project.techStack && false
-              ? project.techStack.map((tech) => {
-                  console.log("Tech is...");
-                  console.log(tech);
-                  console.log(`${IProjectTechStack[tech]}`);
+            {project.categories
+              ? project.categories.map((category) => {
                   return (
-                    <button
-                      key={`${tech}`}
-                      className={
-                        "py-2 px-4 shadow-md no-underline rounded-full bg-blue text-white font-sans font-semibold text-sm border-blue btn-primary hover:text-white hover:bg-blue-light focus:outline-none active:shadow-none mr-2"
-                      }
-                    >
-                      {IProjectTechStack[tech]}
-                    </button>
+                    <Pill
+                      key={`${category}`}
+                      value={IProjectCategory[category]}
+                    />
+                  );
+                })
+              : null}
+          </div>
+
+          {/* Tech stack */}
+          <div className={"m-2 p-2"}>
+            {project.techStack
+              ? project.techStack.map((tech) => {
+                  return (
+                    <Pill key={`${tech}`} value={IProjectTechStack[tech]} />
                   );
                 })
               : null}
           </div>
         </header>
 
-        <div className={"p-4 prose lg:prose-l"}>
-          {project.bodyMarkdown ? (
-            // <div dangerouslySetInnerHTML={{ __html: project.bodyMarkdown }} />
-            <div>This is where the markdown rendered html will go</div>
-          ) : (
-            <div>Coming soon!</div>
-          )}
-        </div>
+        {/* Body */}
+        {project.bodyHtml ? (
+          <div
+            className={"p-4 prose lg:prose-l"}
+            dangerouslySetInnerHTML={{ __html: project.bodyHtml }}
+          />
+        ) : (
+          <div>Coming soon!</div>
+        )}
       </article>
     </Layout>
   );

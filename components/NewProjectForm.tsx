@@ -112,8 +112,6 @@ const NewProjectForm = ({
 
   /* The POST method adds a new entry in the mongodb database. */
   const postData = async (form) => {
-    console.log("Trying to post!");
-    console.log(`${process.env.BACKEND_API}/projects`);
     try {
       const res = await fetch("/api/projects", {
         method: "POST",

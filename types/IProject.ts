@@ -3,6 +3,7 @@ import { IProjectCategory } from "./IProjectCategory";
 import { IProjectTechStack } from "./IProjectTechStack";
 
 export interface IProject extends Document {
+  bodyHtml?: string; // Populated dynamically from bodyMarkdown
   bodyMarkdown?: string;
   categories?: IProjectCategory[];
   date?: string;
