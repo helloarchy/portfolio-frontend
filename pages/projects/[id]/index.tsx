@@ -58,6 +58,7 @@ const ProjectPage = ({ project }: Props) => {
           </div>
 
           {/* Categories */}
+          <h2 className={"text-xl font-serif"}>Categories</h2>
           <div className={"m-2 p-2"}>
             {project.categories
               ? project.categories.map((category) => {
@@ -72,6 +73,7 @@ const ProjectPage = ({ project }: Props) => {
           </div>
 
           {/* Tech stack */}
+          <h2 className={"text-xl font-serif"}>Tech Stack</h2>
           <div className={"m-2 p-2"}>
             {project.techStack
               ? project.techStack.map((tech) => {
