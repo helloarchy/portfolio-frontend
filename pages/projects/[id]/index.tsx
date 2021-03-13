@@ -46,49 +46,54 @@ const ProjectPage = ({ project }: Props) => {
 
   return (
     <Layout pageTitle={project.title ? project.title : "Project"}>
-      <article className={"divide-y pad-2 my-8"}>
-        {/* Top Matter */}
-        <header>
-          {/* Title */}
-          <h1 className={"text-4xl"}>{project.title}</h1>
+      <article className={"pad-2 my-8"}>
+        {/* Title */}
+        <h1 className={"text-4xl"}>{project.title}</h1>
 
-          {/* Date */}
-          <div className={"my-2 p-2"}>
-            {project.date ? <Date dateString={project.date} /> : null}
-          </div>
+        {/* Date */}
+        <div className={"my-2 p-2"}>
+          {project.date ? <Date dateString={project.date} /> : null}
+        </div>
 
-          {/* Categories */}
-          <h2 className={"text-xl font-serif"}>Categories</h2>
-          <div className={"m-2 p-2"}>
-            {project.categories
-              ? project.categories.map((category) => {
-                  return (
-                    <Pill
-                      key={`${category}`}
-                      value={IProjectCategory[category]}
-                    />
-                  );
-                })
-              : null}
-          </div>
+        {/* Categories */}
+        <h2 className={"text-xl font-serif"}>Categories</h2>
+        <div className={"m-2 p-2"}>
+          {project.categories
+            ? project.categories.map((category) => {
+                return (
+                  <Pill
+                    key={`${category}`}
+                    value={IProjectCategory[category]}
+                  />
+                );
+              })
+            : null}
+        </div>
 
-          {/* Tech stack */}
-          <h2 className={"text-xl font-serif"}>Tech Stack</h2>
-          <div className={"m-2 p-2"}>
-            {project.techStack
-              ? project.techStack.map((tech) => {
-                  return (
-                    <Pill key={`${tech}`} value={IProjectTechStack[tech]} />
-                  );
-                })
-              : null}
-          </div>
-        </header>
+        {/* Tech stack */}
+        <h2 className={"text-xl font-serif"}>Tech Stack</h2>
+        <div className={"m-2 p-2"}>
+          {project.techStack
+            ? project.techStack.map((tech) => {
+                return <Pill key={`${tech}`} value={IProjectTechStack[tech]} />;
+              })
+            : null}
+        </div>
+
+        {/* Image */}
+        <div>
+          <img
+            className={"object-scale-down h-50 w-full"}
+            src={project.imageUrl}
+            alt={project.imageDesc}
+          />
+        </div>
 
         {/* Body */}
+        <h2 className={"text-xl font-serif"}>Description</h2>
         {project.bodyHtml ? (
           <div
-            className={"p-4 prose lg:prose-l"}
+            className={"m-2 p-2 prose lg:prose-l"}
             dangerouslySetInnerHTML={{ __html: project.bodyHtml }}
           />
         ) : (
